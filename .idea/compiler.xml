@@ -16,9 +16,10 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
-        <module name="order-server" />
         <module name="product-server" />
+        <module name="payment-server" />
         <module name="customer-server" />
+        <module name="order-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +32,7 @@
       <module name="customer-server" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="order-server" options="-parameters" />
+      <module name="payment-server" options="-parameters" />
       <module name="product-server" options="-parameters" />
     </option>
   </component>

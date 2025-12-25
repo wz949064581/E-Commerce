@@ -45,8 +45,6 @@ public class OrderService {
             );
         }
 
-        //asdf
-
         PaymentRequest paymentRequest = new PaymentRequest(
                 request.amount(),
                 request.paymentMethod(),

@@ -3,11 +3,11 @@ package org.ms.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.ms.entityAndDTO.*;
-import org.ms.exception.BusinessException;
 import org.ms.kafka.OrderConfirmation;
 import org.ms.kafka.OrderProducer;
 import org.ms.repository.CustomerClient;
 import org.ms.repository.OrderRepository;
+import org.ms.repository.PaymentClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +23,12 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest request) {
 
         CustomerResponse customer = this.customerClient.findCustomerById(request.customerId()).orElseThrow(
-                () -> new BusinessException("Cannot create order for non-existing customer")
+                () -> new EntityNotFoundException("Cannot create order for non-existing customer")
         );
 
         List<PurchaseResponse> purchaseProducts = this.productClient.purchaseProducts(request.products());
@@ -43,6 +44,15 @@ public class OrderService {
                     )
             );
         }
+
+        PaymentRequest paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(

@@ -13,7 +13,7 @@ public class kafkaPaymentTopicConfig {
     public NewTopic paymentTopic() {
 
         return TopicBuilder
-                .name("payment-topic")
+                .name("Payment-Topic")
                 .build();
     }
 }

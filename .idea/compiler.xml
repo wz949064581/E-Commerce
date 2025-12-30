@@ -9,7 +9,7 @@
         <module name="config-server" />
         <module name="discovery-server" />
       </profile>
-      <profile name="Annotation profile for payment-server" enabled="true">
+      <profile name="Annotation profile for product-server" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,6 +20,7 @@
         <module name="payment-server" />
         <module name="customer-server" />
         <module name="order-server" />
+        <module name="notification-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +32,7 @@
       <module name="config-server" options="-parameters" />
       <module name="customer-server" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
+      <module name="notification-server" options="-parameters" />
       <module name="order-server" options="-parameters" />
       <module name="payment-server" options="-parameters" />
       <module name="product-server" options="-parameters" />
